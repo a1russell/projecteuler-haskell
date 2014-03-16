@@ -5,7 +5,10 @@ largestPalindromeProduct =
   maximum . palindromes . multiplesOfFactorsWithNumDigits
 
 palindromes :: [Int] -> [Int]
-palindromes _ = [9009]
+palindromes xs = let
+  isPalindrome x = (read . reverse . show $ x) == x
+  in
+    filter isPalindrome xs
 
 multiplesOfFactorsWithNumDigits :: Int -> [Int]
-multiplesOfFactorsWithNumDigits _ = []
+multiplesOfFactorsWithNumDigits _ = [9009]
