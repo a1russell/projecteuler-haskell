@@ -1,14 +1,23 @@
 module LargestPalindromeProduct where
 
+import qualified Data.Set as Set
+
 largestPalindromeProduct :: Int -> Int
 largestPalindromeProduct =
-  maximum . palindromes . multiplesOfFactorsWithNumDigits
+  Set.findMax . palindromes . multiplesOfFactorsWithNumDigits
 
-palindromes :: [Int] -> [Int]
+palindromes :: Set.Set Int -> Set.Set Int
 palindromes xs = let
   isPalindrome x = (read . reverse . show $ x) == x
   in
-    filter isPalindrome xs
+    Set.filter isPalindrome xs
 
-multiplesOfFactorsWithNumDigits :: Int -> [Int]
-multiplesOfFactorsWithNumDigits _ = [9009]
+multiplesOfFactorsWithNumDigits :: Int -> Set.Set Int
+multiplesOfFactorsWithNumDigits numDigits = Set.fromList $
+  let
+    lowestFactor = 10 ^ (numDigits - 1)
+    highestFactor = 10 ^ numDigits - 1
+  in do
+    x <- [lowestFactor..highestFactor]
+    y <- [lowestFactor..highestFactor]
+    return $ x * y
