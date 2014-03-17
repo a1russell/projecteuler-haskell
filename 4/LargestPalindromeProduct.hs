@@ -19,5 +19,5 @@ multiplesOfFactorsWithNumDigits numDigits = Set.fromList $
     highestFactor = 10 ^ numDigits - 1
   in do
     x <- [lowestFactor..highestFactor]
-    y <- [lowestFactor..highestFactor]
+    y <- [lowestFactor..x]
     return $ x * y
